@@ -2,7 +2,7 @@ import bot from './assets/bot.svg';
 import user from './assets/user.svg';
 
 const form = document.querySelector('form');
-const chatContainer = document.getElementById('chat_Container')
+const chatContainer = document.querySelector('#chat-Container');
 
 let loadInterval;
 
@@ -32,7 +32,7 @@ function generateUniqueId() {
   const timeStamp = Date.now();
   const randomNumber = Math.random();
   const hexadecimalString = randomNumber.toString(16);
-  return `id-${timestamp}-${hexadecimalString}`;
+  return `id-${timeStamp}-${hexadecimalString}`;
 }
 
 function chatStripe (isAi, value, uniqueId){
@@ -55,9 +55,10 @@ function chatStripe (isAi, value, uniqueId){
 
 const handleSubmit = async (e) => {
   e.preventDefault();
+
   const data = new FormData(form);
   //users
-  chatContainer.innerHTML += chatStripe(false, data.get('prompt'));
+  chatContainer.innerHTML += chatStripe (false, data.get('prompt'));
   form.reset();
 
   //bot
@@ -68,4 +69,4 @@ const handleSubmit = async (e) => {
   loader(messageDiv);
 }
 
-form.addEventListener('submit', handleSubmit)
+form.addEventListener("submit", handleSubmit)
